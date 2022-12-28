@@ -1,0 +1,111 @@
+main {
+    display: grid;
+    grid-template-areas: "leftnav chat";
+    grid-template-columns: min-content auto;
+    grid-template-rows: minmax(0, 1fr);
+}
+
+#leftnav {
+    display: grid;
+    grid-template-areas: "actions" "recents";
+    grid-template-rows: min-content auto;
+    border-right: 1px solid gray;
+}
+
+#actions {
+    grid-area: actions;
+}
+
+#recents {
+    grid-area: recents;
+    min-width: 20em;
+}
+
+#chat {
+    grid-area: chat;
+    display: grid;
+    grid-template-areas: "header" "messages" "sender";
+    grid-template-rows: min-content auto min-content;
+    padding-left: 1em;
+    padding-bottom: 1em;
+}
+
+#chat-header {
+    grid-area: header;
+}
+
+#chat-sender {
+    grid-area: sender;
+}
+
+#chat-messages {
+    /* border: 1px solid red; */
+    overflow-y: scroll;
+    height: inherit;
+    grid-area: messages;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-sender input {
+    border: 1px solid gray;
+    border-radius: 1em;
+}
+
+.message-row {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.message-row-by-me {
+    flex-direction: row-reverse;
+}
+
+.message-by-me {
+    background: lightskyblue;
+    ;
+}
+
+.message-not-by-me {
+    background: lightgray;
+    ;
+}
+
+.message {
+    padding: 1em 1em;
+    border-radius: 3em;
+}
+
+.recent-item {
+    display: grid;
+    grid-template-areas: "badge fullname" "badge messagetext";
+    grid-template-columns: 3em minmax(0, 1fr);
+    grid-column-gap: 1em;
+    overflow: hidden;
+    font-style: normal;
+    margin-bottom: 0.7em;
+    text-decoration: none;
+}
+
+.recent-item {
+    border-left: 3px solid transparent;
+    padding-left: .5em;
+}
+
+.recent-item.active {
+    border-left-color: blue;
+}
+
+.recent-item-badge {
+    grid-area: badge;
+    font-size: 1.8em;
+}
+
+.recent-item-fullname {
+    grid-area: fullname;
+    font-weight: bolder;
+}
+
+.recent-item-messagetext {
+    grid-area: messagetext;
+}

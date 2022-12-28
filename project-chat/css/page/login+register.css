@@ -1,0 +1,23 @@
+main {
+    display: grid;
+    grid-template-areas: ". . . " ". form ." ". . .";
+    grid-template-rows: auto min-content auto;
+    grid-template-columns: auto min-content auto;
+}
+
+main>form {
+    grid-area: form;
+}
+
+main>form>input {
+    font-size: 2em;
+    min-width: 15em;
+}
+
+main>form>button {
+    font-size: 1.5em;
+}
+
+main>form>label {
+    font-size: 1em;
+}
