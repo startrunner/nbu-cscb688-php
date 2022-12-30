@@ -1,9 +1,10 @@
 <?php
 
-require_once('./_template.php');
-require_once('./_users.php');
-require_once('./_login.php');
-require_once('./_database.php');
+require_once(__DIR__.'/_template.php');
+require_once(__DIR__.'/_users.php');
+require_once(__DIR__.'/_login.php');
+require_once(__DIR__.'/_database.php');
+require_once(__DIR__.'/_recents.php');
 
 $db = open_db_connection();
 
@@ -25,11 +26,15 @@ if (array_key_exists("pm", $_GET)) {
 }
 
 
+$recents = MessagesOperations::instance()->fetch_recents();
+$recentsJson = json_encode($recents);
+
 
 $options = new PageOptions();
 $options->pageTitle = 'Home';
 array_push($options->cssSheets, 'css/page/index.css');
 array_push($options->jsScripts, 'js/page/index.js');
+$options->metaTags["data-recent-messages"] = $recentsJson;
 
 
 render_page($options, function () use ($otherUser) {

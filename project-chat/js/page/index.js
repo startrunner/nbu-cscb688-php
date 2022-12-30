@@ -28,7 +28,7 @@
     });
 
     (async() => {
-        await delayPromise(1000);
+        //await delayPromise(1000);
         for (;;) {
             const tasks = [
                 fetchAndRenderMessages(),
@@ -149,6 +149,18 @@
     }
 
     async function fetchRecents() {
+        {
+            const metaTag = document.querySelector(`meta[name=data-recent-messages]`);
+            if (metaTag) {
+                const json = metaTag.content;
+                const recents = JSON.parse(json);
+                metaTag.parentElement.removeChild(metaTag);
+                return recents;
+            }
+        }
+
+
+
         const url = '/api/messages/fetch-recents.php?';
 
         const response = await fetch(url);
