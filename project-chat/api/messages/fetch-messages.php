@@ -12,7 +12,7 @@ $currentUserId = $currentUser->userId;
 
 $db = open_db_connection();
 
-$otherUserLogin = $_GET["pm"];
+$otherUserLogin = htmlspecialchars($_GET["pm"]);
 $qOtherUserId = $db->prepare("select `id` from `user` where `login` = ?");
 $qOtherUserId->execute([$otherUserLogin]);
 $otherUserId = $qOtherUserId->get_result()->fetch_assoc()["id"];

@@ -5,7 +5,7 @@ require_once('../../_database.php');
 $db = open_db_connection();
 
 
-$login = $_GET["u"];
+$login = htmlspecialchars($_GET["u"]);
 $result = null;
 
 $qUserInfo = $db->prepare("

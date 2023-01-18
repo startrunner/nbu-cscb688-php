@@ -10,22 +10,24 @@
     });
 
     const form_sender = document.querySelector('#chat-sender');
-    form_sender.addEventListener("submit", async e => {
-        e.preventDefault();
-        const textInput = form_sender.querySelector('#input-message-text');
+    if (form_sender) {
+        form_sender.addEventListener("submit", async e => {
+            e.preventDefault();
+            const textInput = form_sender.querySelector('#input-message-text');
 
-        const to = getOtherUserLogin();
-        if (!to) return;
+            const to = getOtherUserLogin();
+            if (!to) return;
 
-        const messageText = textInput.value;
-        if (!messageText) return;
+            const messageText = textInput.value;
+            if (!messageText) return;
 
-        const message = { text: messageText, to };
+            const message = { text: messageText, to };
 
-        await sendMessage(message);
+            await sendMessage(message);
 
-        textInput.value = null;
-    });
+            textInput.value = null;
+        });
+    }
 
     (async() => {
         //await delayPromise(1000);
@@ -177,6 +179,7 @@
     }
 
     async function fetchMessages(otherUserLogin) {
+        if (!otherUserLogin) return [];
         const query = new URLSearchParams();
         query.set('pm', otherUserLogin);
         const url = '/api/messages/fetch-messages.php?' + query;

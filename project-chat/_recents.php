@@ -39,11 +39,11 @@ class MessagesOperations
         from 
             (
                 select 
-                    if(`ref_sender` = ?,`ref_recipient`, `ref_sender`) as `ref_other`,
+                    `ref_other`,
                     `time`, `text`,
                     row_number() over (partition by `ref_other` order by `time` desc) as `rn`
                 from 
-                    `personal_message`
+                    (select *, if(`ref_sender` = ?,`ref_recipient`, `ref_sender`) as `ref_other` from `personal_message`) as `personal_message`
                 where 
                     (`ref_sender` = ? or `ref_recipient` = ?)
             ) as `latest_personal_message`

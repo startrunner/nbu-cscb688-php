@@ -16,7 +16,7 @@ if (!$currentUser->isOk) {
 
 $otherUser = null;
 if (array_key_exists("pm", $_GET)) {
-    $otherLogin = $_GET["pm"];
+    $otherLogin = htmlspecialchars($_GET["pm"]);
     $qOtherInfo = $db->prepare("
     select `first_name`, `last_name`, `login` from `user`
     where `login` = ?

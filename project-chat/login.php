@@ -11,8 +11,8 @@ $failMessage = null;
 
 
 if ($_POST) {
-    $login = $_POST[INPUT_LOGIN];
-    $pass = $_POST[INPUT_PASS];
+    $login = htmlspecialchars($_POST[INPUT_LOGIN]);
+    $pass = htmlspecialchars($_POST[INPUT_PASS]);
     $result = UserOperations::instance()->login_user($login, $pass);
     if ($result->isOk) {
         LoginOperations::instance()->redirect_after_login();
